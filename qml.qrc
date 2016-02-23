@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>TakePicture.qml</file>
+        <file>TakeFromFile.qml</file>
+    </qresource>
+    <qresource prefix="/assets">
+        <file>assets/image_placeholder.png</file>
+        <file>assets/camera_icon.png</file>
+        <file>assets/sdcard.png</file>
+        <file>assets/camera_icon_trasparent.png</file>
+        <file>assets/sdcard_transparent.png</file>
+        <file>assets/shutter-icon.png</file>
+        <file>assets/realto_logo.png</file>
+        <file>assets/backgroud.jpg</file>
+    </qresource>
+</RCC>
