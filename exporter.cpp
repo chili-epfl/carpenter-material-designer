@@ -17,7 +17,10 @@ Exporter::Exporter(QObject *parent) : QObject(parent)
     connect(this,SIGNAL(pushCompleted()),this,SLOT(finished()));
 }
 
-void Exporter::createFile(QUrl imageUrl, QString name, QString density, QString price, QString Young, QString G)
+void Exporter::createFile(QUrl imageUrl, QString name, QString density, QString price, QString Young, QString G,
+                          QString fc0,QString fc90,
+                          QString fmk,QString ft0,
+                          QString ft90, QString fvk)
 {
     if(m_host.isEmpty() || m_username.isEmpty()) return;
     if(name.isEmpty() ||  density.isEmpty() || price.isEmpty() || Young.isEmpty() || G.isEmpty()){
@@ -40,6 +43,30 @@ void Exporter::createFile(QUrl imageUrl, QString name, QString density, QString 
         emit error("ShearModule-rangeError");
         return;
     }
+    if(fc0.toInt()<1 || fc0.toInt()>100){
+        emit error("Parallel Compression-rangeError");
+        return;
+    }
+    if(fc90.toInt()<1 || fc90.toInt()>100){
+        emit error("Perpendicular Compression-rangeError");
+        return;
+    }
+    if(fmk.toInt()<1 || fmk.toInt()>100){
+        emit error("Bending-rangeError");
+        return;
+    }
+    if(ft0.toInt()<1 || ft0.toInt()>100){
+        emit error("Parallel Tension-rangeError");
+        return;
+    }
+    if(ft90.toInt()<1 || ft90.toInt()>100){
+        emit error("Perpendicular Tension-rangeError");
+        return;
+    }
+    if(fvk.toInt()<1 || fvk.toInt()>100){
+        emit error("Shear-rangeError");
+        return;
+    }
 
 
     QString filename=QDateTime::currentDateTime().toString("dMyyhms");
@@ -55,6 +82,12 @@ void Exporter::createFile(QUrl imageUrl, QString name, QString density, QString 
          <<"Price:"<<price<<";\n"
         <<"Young:"<<Young<<";\n"
         <<"G:"<<G<<";\n"
+        <<"fc0:"<<fc0<<";\n"
+        <<"fc90:"<<fc90<<";\n"
+        <<"ft0:"<<ft0<<";\n"
+        <<"ft90:"<<ft90<<";\n"
+        <<"fmk:"<<fmk<<";\n"
+        <<"fvk:"<<fvk<<";\n"
         <<"TextureImage:"<<m_username+"-"+filename<<".png;";
         file.close();
         image.save(tmpDir+m_username+"-"+filename+".png");

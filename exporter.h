@@ -15,7 +15,7 @@ class Exporter : public QObject
 
 public:
     explicit Exporter(QObject *parent = 0);
-    Q_INVOKABLE void createFile(QUrl imageurl, QString name, QString density, QString price, QString Young, QString G);
+    Q_INVOKABLE void createFile(QUrl imageurl, QString name, QString density, QString price, QString Young, QString G, QString fc0, QString fc90, QString fmk, QString ft0, QString ft90, QString fvk);
     QString host(){return m_host;}
     QString username(){return m_username;}
     void setHost(QString host);

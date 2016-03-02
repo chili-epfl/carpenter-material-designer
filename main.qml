@@ -137,6 +137,52 @@ ApplicationWindow {
                         validator: IntValidator {bottom: 1000; top: 1500;}
                         Layout.fillWidth:true
                     }
+                    RowLayout{
+                        Layout.fillWidth:true
+                        TextField {
+                            id:fmk_field
+                            placeholderText: "Bending Resistance (1-100 N/mm2)"
+                            font.pointSize:14
+                            Layout.fillWidth:true
+                        }
+                        TextField {
+                            id:fvk_field
+                            placeholderText: "Shear Resistance (1-100 N/mm2)"
+                            font.pointSize:14
+                            Layout.fillWidth:true
+                        }
+                    }
+                    RowLayout{
+                        Layout.fillWidth:true
+                        TextField {
+                            id:ft0_field
+                            placeholderText: "Parallel Traction Resistance (1-100 N/mm2)"
+                            font.pointSize:14
+                            Layout.fillWidth:true
+                        }
+                        TextField {
+                            id:fc0_field
+                            placeholderText: "Parallel Compression Resistance (1-100 N/mm2)"
+                            font.pointSize:14
+                            Layout.fillWidth:true
+                        }
+                    }
+                    RowLayout{
+                        Layout.fillWidth:true
+                        TextField {
+                            id:ft90_field
+                            placeholderText: "Perpendicular Traction Resistance (1-100 N/mm2)"
+                            font.pointSize:14
+                            Layout.fillWidth:true
+                        }
+                        TextField {
+                            id:fc90_field
+                            placeholderText: "Perpendicular Compression Resistance (1-100 N/mm2)"
+                            font.pointSize:14
+                            Layout.fillWidth:true
+                        }
+                    }
+
                     Row{
                         id:button_row
                         anchors.horizontalCenter: parent.horizontalCenter
@@ -149,6 +195,12 @@ ApplicationWindow {
                                 price_field.text=""
                                 young_field.text=""
                                 g_field.text=""
+                                fc0_field.text=""
+                                fc90_field.text=""
+                                fmk_field.text=""
+                                ft0_field.text=""
+                                ft90_field.text=""
+                                fvk_field.text=""
                             }
                         }
                         Button{
@@ -156,7 +208,10 @@ ApplicationWindow {
                             onClicked: {
                                 exporter.createFile(texture_image.source,name_field.text,
                                                     density_field.text,price_field.text,
-                                                    young_field.text,g_field.text)
+                                                    young_field.text,g_field.text,
+                                                    fc0_field.text,fc90_field.text,
+                                                    fmk_field.text,ft0_field.text,
+                                                    ft90_field.text,fvk_field.text)
                             }
                         }
                     }
