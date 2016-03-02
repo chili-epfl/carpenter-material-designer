@@ -125,6 +125,7 @@ ApplicationWindow {
                                     rows: 5
                                     columns: 2
                                     anchors.fill: parent
+                                    anchors.margins: 10
                                     Label {
                                         text: "Name"
                                     }
@@ -208,6 +209,7 @@ ApplicationWindow {
                                     rows: 6
                                     columns: 2
                                     anchors.fill: parent
+                                    anchors.margins: 10
                                     Label {
                                         text: "Fmd(N/mm2)"
                                     }
