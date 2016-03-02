@@ -14,6 +14,17 @@ ApplicationWindow {
     height: 480
     title: qsTr("Realto-Material-Designer")
     property url currentImage;
+    property string name;
+    property real density:1;
+    property real price:1;
+    property real young:7000;
+    property real g:440;
+    property real fmk:10;
+    property real fvk:10;
+    property real ft0:10;
+    property real fc0:10;
+    property real fc90:10;
+    property real ft90:10;
 
     Exporter{
         id:exporter
@@ -100,87 +111,192 @@ ApplicationWindow {
                     anchors.centerIn: parent
                     anchors.margins: dp2px(16)
                     spacing: 10
-                    TextField {
-                        id:name_field
-                        placeholderText: "Enter Name"
-                        font.pointSize:14
+                    TabView{
                         Layout.fillWidth:true
-                        //width: parent.width
-                    }
-                    TextField {
-                        id:density_field
-                        placeholderText: "Enter Density (0.1-2 g/cm3)"
-                        focus:true
-                        validator: DoubleValidator {bottom: 0.1 ; top: 2;}
-                        font.pointSize:14
-                        Layout.fillWidth:true
-                    }
-                    TextField {
-                        id:price_field
-                        placeholderText: "Enter Price"
-                        focus:true
-                        validator: IntValidator {bottom: 1; top: 100;}
-                        font.pointSize:14
-                        Layout.fillWidth:true
-                    }
-                    TextField {
-                        id:young_field
-                        placeholderText: "Enter Elasticity Module (15000-30000)"
-                        font.pointSize:14
-                        validator: IntValidator {bottom: 15000; top: 30000;}
-                        Layout.fillWidth:true
-                    }
-                    TextField {
-                        id:g_field
-                        placeholderText: "Enter Shear Module (1000-1500)"
-                        font.pointSize:14
-                        validator: IntValidator {bottom: 1000; top: 1500;}
-                        Layout.fillWidth:true
-                    }
-                    RowLayout{
-                        Layout.fillWidth:true
-                        TextField {
-                            id:fmk_field
-                            placeholderText: "Bending Resistance (1-100 N/mm2)"
-                            font.pointSize:14
-                            Layout.fillWidth:true
+                        Layout.fillHeight:true
+                        Tab{
+                            title: "General"
+                            anchors.fill: parent
+                            Rectangle{
+                                color:"white"
+                                anchors.fill: parent
+
+                                GridLayout{
+                                    rows: 5
+                                    columns: 2
+                                    anchors.fill: parent
+                                    Label {
+                                        text: "Name"
+                                    }
+                                    TextField {
+                                        id:name_field
+                                        placeholderText: "Enter Name"
+                                        font.pointSize:12
+                                        onTextChanged: name=text;
+
+                                    }
+
+                                    Label {
+                                        text: "Density(g/cm3)"
+                                    }
+                                    SpinBox {
+                                        id: density_field
+                                        decimals: 1
+                                        stepSize: 0.1
+                                        value: density
+                                        minimumValue: 0.1
+                                        maximumValue: 2
+                                        font.pointSize: 12
+                                        onValueChanged: density=value;
+
+                                    }
+
+
+                                    Label {
+                                        text: "Price(Chf)"
+                                    }
+                                    SpinBox {
+                                        id: price_field
+                                        stepSize: 1
+                                        value: price
+                                        minimumValue: 1
+                                        maximumValue: 100
+                                        font.pointSize: 12
+                                        onValueChanged: price=value;
+
+                                    }
+
+
+                                    Label {
+                                        text: "Elasticity(N/mm2)"
+                                    }
+                                    SpinBox {
+                                        id: young_field
+                                        stepSize: 500
+                                        value: young
+                                        minimumValue: 3000
+                                        maximumValue: 30000
+                                        font.pointSize: 12
+                                        onValueChanged: young=value;
+
+                                    }
+                                    Label {
+                                        text: "Shear Modulus(N/mm2)"
+                                    }
+                                    SpinBox {
+                                        id: g_field
+                                        value: g
+                                        stepSize: 50
+                                        minimumValue: 100
+                                        maximumValue: 1500
+                                        font.pointSize: 12
+                                        onValueChanged: g=value;
+
+                                    }
+
+                                }
+                            }
                         }
-                        TextField {
-                            id:fvk_field
-                            placeholderText: "Shear Resistance (1-100 N/mm2)"
-                            font.pointSize:14
-                            Layout.fillWidth:true
+
+                        Tab{
+                            title: "Resistance"
+                            anchors.fill: parent
+                            Rectangle{
+                                color:"white"
+                                anchors.fill: parent
+                                GridLayout{
+                                    rows: 6
+                                    columns: 2
+                                    anchors.fill: parent
+                                    Label {
+                                        text: "Fmd(N/mm2)"
+                                    }
+                                    SpinBox {
+                                        id: fmk_field
+                                        decimals: 1
+                                        stepSize: 1
+                                        value: fmk
+                                        minimumValue: 1
+                                        maximumValue: 100
+                                        font.pointSize: 12
+                                        onValueChanged: fmk=value;
+
+                                    }
+                                    Label {
+                                        text: "Fvd(N/mm2)"
+                                    }
+                                    SpinBox {
+                                        id: fvk_field
+                                        decimals: 1
+                                        stepSize: 1
+                                        value: fvk
+                                        minimumValue: 1
+                                        maximumValue: 100
+                                        font.pointSize: 12
+                                        onValueChanged: fvk=value;
+
+                                    }
+                                    Label {
+                                        text: "Ft0d(N/mm2)"
+                                    }
+                                    SpinBox {
+                                        id: ft0_field
+                                        decimals: 1
+                                        stepSize: 1
+                                        value: ft0
+                                        minimumValue: 1
+                                        maximumValue: 100
+                                        font.pointSize: 12
+                                        onValueChanged: ft0=value;
+
+                                    }
+                                    Label {
+                                        text: "Fc0d(N/mm2)"
+                                    }
+                                    SpinBox {
+                                        id: fc0_field
+                                        decimals: 1
+                                        stepSize: 1
+                                        value: fc0
+                                        minimumValue: 1
+                                        maximumValue: 100
+                                        font.pointSize: 12
+                                        onValueChanged: fc0=value;
+
+                                    }
+
+                                    Label {
+                                        text: "Ft90d(N/mm2)"
+                                    }
+                                    SpinBox {
+                                        id: ft90_field
+                                        decimals: 1
+                                        stepSize: 1
+                                        value: ft90
+                                        minimumValue: 1
+                                        maximumValue: 100
+                                        font.pointSize: 12
+                                        onValueChanged: ft90=value;
+
+                                    }
+                                    Label {
+                                        text: "Fc90d(N/mm2)"
+                                    }
+                                    SpinBox {
+                                        id: fc90_field
+                                        decimals: 1
+                                        stepSize: 1
+                                        value: fc90
+                                        minimumValue: 1
+                                        maximumValue: 100
+                                        font.pointSize: 12
+                                        onValueChanged: fc90=value;
+                                    }
+
+                                }
+                            }
                         }
-                    }
-                    RowLayout{
-                        Layout.fillWidth:true
-                        TextField {
-                            id:ft0_field
-                            placeholderText: "Parallel Traction Resistance (1-100 N/mm2)"
-                            font.pointSize:14
-                            Layout.fillWidth:true
-                        }
-                        TextField {
-                            id:fc0_field
-                            placeholderText: "Parallel Compression Resistance (1-100 N/mm2)"
-                            font.pointSize:14
-                            Layout.fillWidth:true
-                        }
-                    }
-                    RowLayout{
-                        Layout.fillWidth:true
-                        TextField {
-                            id:ft90_field
-                            placeholderText: "Perpendicular Traction Resistance (1-100 N/mm2)"
-                            font.pointSize:14
-                            Layout.fillWidth:true
-                        }
-                        TextField {
-                            id:fc90_field
-                            placeholderText: "Perpendicular Compression Resistance (1-100 N/mm2)"
-                            font.pointSize:14
-                            Layout.fillWidth:true
-                        }
+
                     }
 
                     Row{
@@ -188,30 +304,14 @@ ApplicationWindow {
                         anchors.horizontalCenter: parent.horizontalCenter
                         spacing: 20
                         Button{
-                            text: "Clear"
-                            onClicked: {
-                                name_field.text=""
-                                density_field.text=""
-                                price_field.text=""
-                                young_field.text=""
-                                g_field.text=""
-                                fc0_field.text=""
-                                fc90_field.text=""
-                                fmk_field.text=""
-                                ft0_field.text=""
-                                ft90_field.text=""
-                                fvk_field.text=""
-                            }
-                        }
-                        Button{
                             text: "Create"
                             onClicked: {
-                                exporter.createFile(texture_image.source,name_field.text,
-                                                    density_field.text,price_field.text,
-                                                    young_field.text,g_field.text,
-                                                    fc0_field.text,fc90_field.text,
-                                                    fmk_field.text,ft0_field.text,
-                                                    ft90_field.text,fvk_field.text)
+                                exporter.createFile(texture_image.source,name,
+                                                    density,price,
+                                                    young,g,
+                                                    fc0,fc90,
+                                                    fmk,ft0,
+                                                    ft90,fvk)
                             }
                         }
                     }
@@ -242,6 +342,7 @@ ApplicationWindow {
                         }
                     }
                 }
+
             }
 
             Rectangle{

@@ -27,46 +27,46 @@ void Exporter::createFile(QUrl imageUrl, QString name, QString density, QString 
         emit error("All fields should be filled");
         return;
     }
-    if(density.toDouble()<0.1 || density.toDouble()>2){
-        emit error("Desity-rangeError");
-        return;
-    }
-    if(price.toInt()<1 || price.toInt()>100){
-        emit error("Price-rangeError");
-        return;
-    }
-    if(Young.toInt()<15000 || Young.toInt()>30000){
-        emit error("Elasticity-rangeError");
-        return;
-    }
-    if(G.toInt()<1000 || G.toInt()>1500){
-        emit error("ShearModule-rangeError");
-        return;
-    }
-    if(fc0.toInt()<1 || fc0.toInt()>100){
-        emit error("Parallel Compression-rangeError");
-        return;
-    }
-    if(fc90.toInt()<1 || fc90.toInt()>100){
-        emit error("Perpendicular Compression-rangeError");
-        return;
-    }
-    if(fmk.toInt()<1 || fmk.toInt()>100){
-        emit error("Bending-rangeError");
-        return;
-    }
-    if(ft0.toInt()<1 || ft0.toInt()>100){
-        emit error("Parallel Tension-rangeError");
-        return;
-    }
-    if(ft90.toInt()<1 || ft90.toInt()>100){
-        emit error("Perpendicular Tension-rangeError");
-        return;
-    }
-    if(fvk.toInt()<1 || fvk.toInt()>100){
-        emit error("Shear-rangeError");
-        return;
-    }
+//    if(density.toDouble()<0.1 || density.toDouble()>2){
+//        emit error("Desity-rangeError");
+//        return;
+//    }
+//    if(price.toInt()<1 || price.toInt()>100){
+//        emit error("Price-rangeError");
+//        return;
+//    }
+//    if(Young.toInt()<15000 || Young.toInt()>30000){
+//        emit error("Elasticity-rangeError");
+//        return;
+//    }
+//    if(G.toInt()<1000 || G.toInt()>1500){
+//        emit error("ShearModule-rangeError");
+//        return;
+//    }
+//    if(fc0.toInt()<1 || fc0.toInt()>100){
+//        emit error("Parallel Compression-rangeError");
+//        return;
+//    }
+//    if(fc90.toInt()<1 || fc90.toInt()>100){
+//        emit error("Perpendicular Compression-rangeError");
+//        return;
+//    }
+//    if(fmk.toInt()<1 || fmk.toInt()>100){
+//        emit error("Bending-rangeError");
+//        return;
+//    }
+//    if(ft0.toInt()<1 || ft0.toInt()>100){
+//        emit error("Parallel Tension-rangeError");
+//        return;
+//    }
+//    if(ft90.toInt()<1 || ft90.toInt()>100){
+//        emit error("Perpendicular Tension-rangeError");
+//        return;
+//    }
+//    if(fvk.toInt()<1 || fvk.toInt()>100){
+//        emit error("Shear-rangeError");
+//        return;
+//    }
 
 
     QString filename=QDateTime::currentDateTime().toString("dMyyhms");
@@ -95,8 +95,10 @@ void Exporter::createFile(QUrl imageUrl, QString name, QString density, QString 
         image.save(materialsDir+m_username+"-"+filename+".png");
         file.remove();
         QFile::remove(tmpDir+m_username+"-"+filename+".png");
+        emit error("Done!");
     }
     else{
+        file.remove();
         emit error("Can't create file or read image");
     }
 
